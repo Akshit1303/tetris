@@ -5,11 +5,10 @@ using UnityEngine;
 
 public class Group : MonoBehaviour {
 
-    // time of the last fall, used to auto fall after 
-    // time parametrized by `level`
+   
     private float lastFall;
 
-    // last key pressed time, to handle long press behavior
+    
     private float lastKeyDown;
     private float timeKeyPressed;
 
@@ -27,7 +26,7 @@ public class Group : MonoBehaviour {
                 return false;
             }
 
-            // Block in grid cell (and not par of same group)?
+            // Block in grid cell ?
             if (Grid.grid[(int)(v.x), (int)(v.y)] != null &&
                 Grid.grid[(int)(v.x), (int)(v.y)].parent != transform) {
                 return false;
@@ -63,17 +62,17 @@ public class Group : MonoBehaviour {
     void gameOver() {
         Debug.Log("GAME OVER!");
         while (!isValidGridPos()) {
-            //Debug.LogFormat("Updating last group...: {0}", transform.position);
+            
             transform.position  += new Vector3(0, 1, 0);
         } 
         updateGrid(); // to not overleap invalid groups
         enabled = false; // disable script when dies
-        UIController.gameOver(); // active Game Over panel
+        UIController.gameOver(); 
         Highscore.Set(ScoreManager.score); // set highscore
-        //Music.stopMusic(); // stop Music
+        
     }
 
-    // Use this for initialization
+    
     void Start () {
         lastFall = Time.time;
         lastKeyDown = Time.time;
@@ -88,8 +87,7 @@ public class Group : MonoBehaviour {
     }
 
     void tryChangePos(Vector3 v) {
-        // modify position 
-        // FIXME: maybe this is idiot? I can create a copy before and only assign to the transform if is valid
+       
         transform.position += v;
 
         // See if valid
@@ -105,7 +103,7 @@ public class Group : MonoBehaviour {
         transform.position += new Vector3(0, -1, 0);
 
         if (isValidGridPos()){
-            // It's valid. Update grid... again
+            
             updateGrid();
         } else {
             // it's not valid. revert

@@ -53,9 +53,9 @@ public class MainMenu : MonoBehaviour {
 
     void changePanel(int direction) {
         buttons[buttonSelected].SetActive(false);
-        //Debug.LogFormat("Old selected: {0}", buttonSelected);
+       
         buttonSelected = Utils.Mod(buttonSelected + direction,  numberOfButtons);
-        //Debug.LogFormat("New selected: {0}", buttonSelected);
+       
         buttons[buttonSelected].SetActive(true);
     }
 
